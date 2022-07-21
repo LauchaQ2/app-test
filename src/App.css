@@ -1,5 +1,7 @@
 .App {
-  text-align: left;
+  text-align: center;
+  background-color: rgb(110, 110, 109);
+
 }
 
 .App-logo {
@@ -13,6 +15,27 @@
   }
 }
 
+.list{
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(187, 187, 187);
+  font-size: 25px;
+  font-weight: 600;
+}
+.form{
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+.containerform{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(110, 110, 109);
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
