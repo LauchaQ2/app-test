@@ -35,7 +35,13 @@ function App() {
         console.log(res)
       })
       .catch(err=>{
-        console.log(err)
+        console.log(err.response.data.errors)
+        let er = err.response.data.errors;
+        if(er.lenght === 1){
+          alert(er)
+        }er.map(error=>{
+          alert(error.msg)
+        })
       })
      }
      
