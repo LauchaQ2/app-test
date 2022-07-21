@@ -7,7 +7,7 @@ function App() {
   const [users, setUsers] = useState([])
 
   const getUsers = async() =>{
-    const res =  await axios.get('https://restserver-lautaro-quevedo.herokuapp.com/api/users?limit=25')
+    const res =  await axios.get('https://restserver-lautaro-quevedo.herokuapp.com/api/users?limit=50')
     setUsers(res.data.users)
   }
 
