@@ -6,8 +6,10 @@ function App() {
 
   const [users, setUsers] = useState([])
 
+  const [limit, setLimit] = useState('3')
+
   const getUsers = async() =>{
-    const res =  await axios.get('https://restserver-lautaro-quevedo.herokuapp.com/api/users?limit=50')
+    const res =  await axios.get(`https://restserver-lautaro-quevedo.herokuapp.com/api/users?limit=${limit}`)
     setUsers(res.data.users)
   }
 
@@ -25,8 +27,12 @@ function App() {
       const {name, value} = e.target
       setFormData({...formData, [name] : value})
   } 
-
-
+  const handleLimit = (e) =>{
+    var regex = /[^0-9]/g;
+    e.target.value = e.target.value.replace(regex, "");
+    setLimit(e.target.value)
+  }
+ 
      const handleSubmitPost = (event) =>{
       event.preventDefault();
       console.log(formData)
@@ -44,22 +50,10 @@ function App() {
         })
       })
      }
+    
      
      return (
     <div className="App">
-        <h1>LISTA DE USUARIOS</h1>
-    {users.length === 0 && <p>Nada</p>}
-    <ul>{users.map((user, i)=>{
-      return(
-        <div className='list'>
-        <li>Usuario n°: {i}</li>
-        <li key={i}>Nombre: {user.name}</li>
-        <li>Email: {user.email}</li>
-        </div>
-        )
-    })}
-    <button onClick={()=>{getUsers()}}>Actualizar lista de usuarios</button>
-    </ul>
     <div className='containerform'>
     <h1>CREAR USUARIO</h1>
     <form className='form' onSubmit={handleSubmitPost}>
@@ -71,6 +65,23 @@ function App() {
     </form>
 
     </div>
+    
+        <h1>LISTA DE USUARIOS</h1>
+        <label>¿Cúantos usuarios quieres ver?</label>
+        <input name='input' placeholder='Cantidad de usuarios' onChange={handleLimit}/>
+        <button onClick={()=>{getUsers()}}>Actualizar lista de usuarios</button>
+    {users.length === 0 && <p>Nada</p>}
+    <ul>{users.map((user, i)=>{
+      return(
+        <div key={i} className='list'>
+        <li>Usuario n°: {i}</li>
+        <li key={i}>Nombre: {user.name}</li>
+        <li>Email: {user.email}</li>
+        </div>
+        )
+    })}
+    </ul>
+  
     </div>
   );
 }
