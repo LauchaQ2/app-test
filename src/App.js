@@ -7,81 +7,99 @@ function App() {
   const [users, setUsers] = useState([])
 
   const [limit, setLimit] = useState('3')
+  const [logged, setLogged] = useState('')
+  const [userLogged, setUserLogged] = useState({})
 
-  const getUsers = async() =>{
-    const res =  await axios.get(`https://restserver-lautaro-quevedo.herokuapp.com/api/users?limit=${limit}`)
+  const getUsers = async () => {
+    const res = await axios.get(`https://restserver-lautaro-quevedo.herokuapp.com/api/users?limit=${limit}`)
     setUsers(res.data.users)
   }
 
   useEffect(() => {
     getUsers()
-    }, []);
+  }, []);
 
-    const [formData, setFormData] = useState({
-      name: '',
-      email: '',
-      password: '',
-      role: ''
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
   })
-    const handleChange = (e) => {
-      const {name, value} = e.target
-      setFormData({...formData, [name] : value})
-  } 
-  const handleLimit = (e) =>{
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
+  const handleLimit = (e) => {
     var regex = /[^0-9]/g;
     e.target.value = e.target.value.replace(regex, "");
     setLimit(e.target.value)
   }
- 
-     const handleSubmitPost = (event) =>{
-      event.preventDefault();
-      console.log(formData)
-      axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/users', formData)
-      .then(res=>{
-        console.log(res)
+  const login = (event) => {
+    event.preventDefault();
+    console.log(formData)
+    axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/auth/login', formData)
+      .then(res => {
+        console.log(res.data)
+        setUserLogged(res.data)
+        setLogged(res.status)
       })
-      .catch(err=>{
+      .catch(err => {
         console.log(err.response.data.errors)
         let er = err.response.data.errors;
-        if(er.lenght === 1){
+        if (er.lenght === 1) {
           alert(er)
-        }er.map(error=>{
+        } er.map(error => {
           alert(error.msg)
         })
       })
-     }
-    
-     
-     return (
-    <div className="App">
-    <div className='containerform'>
-    <h1>CREAR USUARIO</h1>
-    <form className='form' onSubmit={handleSubmitPost}>
-      <input name='name' placeholder='name' onChange={handleChange}/>
-      <input name='email' placeholder='email' onChange={handleChange}/>
-      <input name='password' placeholder='password' onChange={handleChange}/>
-      <input name='role' placeholder='role' onChange={handleChange}/>
-      <button>Enviar</button>
-    </form>
+  }
 
-    </div>
-    
-        <h1>LISTA DE USUARIOS</h1>
-        <label>¿Cúantos usuarios quieres ver?</label>
-        <input name='input' placeholder='Cantidad de usuarios' onChange={handleLimit}/>
-        <button onClick={()=>{getUsers()}}>Actualizar lista de usuarios</button>
-    {users.length === 0 && <p>Nada</p>}
-    <ul>{users.map((user, i)=>{
-      return(
-        <div key={i} className='list'>
-        <li>Usuario n°: {i}</li>
-        <li key={i}>Nombre: {user.name}</li>
-        <li>Email: {user.email}</li>
-        </div>
-        )
-    })}
-    </ul>
-  
+  const handleSubmitPost = (event) => {
+    event.preventDefault();
+    console.log(formData)
+    axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/users', formData)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err.response.data.errors)
+        let er = err.response.data.errors;
+        if (er.lenght === 1) {
+          alert(er)
+        } er.map(error => {
+          alert(error.msg)
+        })
+      })
+  }
+
+
+  return (
+    <div className="App">
+      <div className='containerform'>
+        {logged === 200
+          ?<>
+          <div className='profile'>
+            <div className='box-left'>
+              <img src={userLogged.user.img} />
+            </div>
+
+            <div className='box-right'>
+            <h1>{userLogged.user.name}</h1>
+            <h3>{userLogged.user.email}</h3>
+            <h3></h3>
+            </div>
+          </div>
+          <button onClick={() => setLogged('')}>Logout</button>
+          </>
+          :
+          <>
+            <h1>Iniciar Sesión</h1><form className='form' onSubmit={login}>
+              <input name='email' placeholder='email' onChange={handleChange} />
+              <input name='password' placeholder='password' onChange={handleChange} />
+              <button>Login</button>
+            </form>
+          </>
+        }
+
+      </div>
     </div>
   );
 }
