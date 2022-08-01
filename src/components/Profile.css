@@ -1,0 +1,14 @@
+.select-file{
+    border: 0px;
+    background-color: white;
+}
+.box-right,.box-left{
+    padding: 20px;
+  }
+
+.box-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

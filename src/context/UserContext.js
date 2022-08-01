@@ -8,7 +8,8 @@ const UserContext = createContext();
 const UserProvider = ({children}) => {
     const [userLogged, setUserLogged] = useState({})
     const [isLogin, setIsLogin] = useState(false)
-    
+    const [img, setImg] = useState({})
+    const[idUser, setIdUser] = useState()
     const [user, setUser] = useState({
       email: '',
       password: ''
@@ -35,8 +36,37 @@ const UserProvider = ({children}) => {
             const data = {...response.data}
             setUserLogged(data)
             console.log(userLogged)
+            const id = data.user.uid; 
+            setIdUser(id)
             setIsLogin(true)
             console.log(isLogin)
+            console.log(data.user.uid)
+            console.log(idUser)
+          })
+          .catch(err => {
+            console.log(err.response.data.errors)
+            let er = err.response.data.errors;
+            if (er.lenght === 1) {
+              alert(er)
+            } er.map(error => {
+              alert(error.msg)
+            })
+          })
+      }
+
+      const onChangePicture = (e) => {
+        console.log(img);
+        const image = e.target.files[0];
+        setImg(image);
+    };
+
+
+      const updateProfileImg = () => {
+        console.log(img)
+
+          axios.put(`https://restserver-lautaro-quevedo.herokuapp.com/api/uploads/users/${idUser}`, img)
+          .then(response => {
+            console.log(response)
           })
           .catch(err => {
             console.log(err.response.data.errors)
@@ -81,7 +111,10 @@ const UserProvider = ({children}) => {
         setUserLogged,
         setIsLogin,
         createUser,
-        handleChangeForm
+        handleChangeForm,
+        onChangePicture,
+        setImg,
+        updateProfileImg
     }
     
     return(

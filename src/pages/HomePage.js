@@ -47,8 +47,8 @@ const HomePage = () => {
       <div className="App">
         <div className='containerform'>
         <><h1>Iniciar Sesión</h1><div className='form'>
-          <input name='email' placeholder='E-mail' onChange={handleChange} />
-          <input name='password' placeholder='Contraseña' onChange={handleChange} />
+          <input className='input-forms' name='email' placeholder='E-mail' onChange={handleChange} />
+          <input className='input-forms' name='password' placeholder='Contraseña' onChange={handleChange} />
           <button onClick={login}>Login</button>
       </div>
       <Link to='/signin'>

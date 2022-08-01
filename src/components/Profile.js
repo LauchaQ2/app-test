@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import UserContext from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
+import './Profile.css';
 
-const Profile = ({ clearUser }) => {
+const Profile = () => {
 
-    const { userLogged, setUserLogged, setIsLogin } = useContext(UserContext);
+    const { userLogged, setUserLogged, setIsLogin, onChangePicture,updateProfileImg} = useContext(UserContext);
     let navigate = useNavigate();
 
     const clear = () => {
@@ -18,6 +19,8 @@ const Profile = ({ clearUser }) => {
         <div className='center'><div className='profile'>
             <div className='box-left'>
                 <img src={!userLogged.user.img ? 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png' : userLogged.user.img} />
+                <input onChange={onChangePicture} name='Edit profile image' className='select-file' type="file"/>
+                <button onClick={updateProfileImg}>Actualizar imagen</button>
             </div>
 
             <div className='box-right'>
