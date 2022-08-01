@@ -53,6 +53,13 @@ img{
 .box-right,.box-left{
   padding: 20px;
 }
+p{
+  color: blue;
+  font-size: 25px;
+}
+.center{
+  text-align: center;
+}
 .containerform{
   display: flex;
   justify-content: center;
