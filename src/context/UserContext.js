@@ -96,8 +96,8 @@ const UserProvider = ({ children }) => {
   }
 
   const updateProfileImg = () => {
+    alert("Your file is being uploaded!")
     console.log(img)
-
     axios.put(`https://restserver-lautaro-quevedo.herokuapp.com/api/uploads/users/${idUser}`, img)
       .then(response => {
         console.log(response)
