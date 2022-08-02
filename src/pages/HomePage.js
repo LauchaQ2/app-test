@@ -11,7 +11,7 @@ const HomePage = () => {
     const [limit, setLimit] = useState('3')
     
     
-    const {login,handleChange,isLogin,userLogged, setUserLogged} = useContext(UserContext);
+    const {login,handleChange,isLogin,setLocalOk, localOk} = useContext(UserContext);
     const getUsers = async () => {
       const res = await axios.get(`https://restserver-lautaro-quevedo.herokuapp.com/api/users?limit=${limit}`)
       setUsers(res.data.users)
@@ -38,9 +38,10 @@ const HomePage = () => {
    
     useEffect(() => {
       if(isLogin === true){
-        navigate('/profile') 
+        navigate('/profile')
+        setLocalOk(false) 
         }
-    }, [userLogged]);
+    }, [localOk]);
     
   
     return (

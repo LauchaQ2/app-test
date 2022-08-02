@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  const [userLogged, setUserLogged] = useState({})
+  const [userLogged, setUserLogged] = useState(JSON.parse(localStorage.getItem('user')))
+  const [localOk, setLocalOk] = useState(false)
   const [isLogin, setIsLogin] = useState(false)
   const [img, setImg] = useState({})
   const [someUp, setSomeUp] = useState(false)
@@ -31,19 +32,25 @@ const UserProvider = ({ children }) => {
     setFormData({ ...formData, [name]: value })
   }
 
-  const login = () => {
+  const [loader, setLoader] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoader(false)
+    }, 1500);
+  }, []);
+
+  const login = async () => {
     console.log(user)
-    axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/auth/login', user)
+    await axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/auth/login', user)
       .then(response => {
         const data = { ...response.data }
+        localStorage.setItem('user', JSON.stringify(data))
         setUserLogged(data)
-        console.log(userLogged)
         const id = data.user.uid;
         setIdUser(id)
         setIsLogin(true)
-        console.log(isLogin)
-        console.log(data.user.uid)
-        console.log(idUser)
+        setLocalOk(true)
       })
       .catch(err => {
         console.log(err.response.data.errors)
@@ -75,8 +82,9 @@ const UserProvider = ({ children }) => {
     const url = `https://restserver-lautaro-quevedo.herokuapp.com/api/uploads/users/${idUser}`;
     axios.put(url, formDat)
       .then((response) => {
-        const data = { user: {...response.data} }
+        const data = { user: { ...response.data } }
         console.log(data)
+        localStorage.setItem('user', JSON.stringify(data))
         setUserLogged(data)
         setRefresh(true)
         setSomeUp(false)
@@ -112,10 +120,15 @@ const UserProvider = ({ children }) => {
     axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/users', formData)
       .then(response => {
         const data = { ...response.data }
+        localStorage.setItem('user', JSON.stringify(data))
         setUserLogged(data)
         console.log(userLogged)
+        const idc = data.user.uid;
+        console.log(data)
+        setIdUser(idc)
+        console.log(idUser)
         setIsLogin(true)
-        console.log(isLogin)
+        setLocalOk(true)
       })
       .catch(err => {
         console.log(err.response.data.errors)
@@ -145,6 +158,10 @@ const UserProvider = ({ children }) => {
     setRefresh,
     refresh,
     someUp,
+    loader,
+    setLoader,
+    localOk,
+    setLocalOk
   }
 
   return (

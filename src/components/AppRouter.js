@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import { Routes, BrowserRouter, Route,  } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import SignIn from './SignIn';
@@ -13,6 +13,7 @@ const AppRouter = () => {
   return (
     <div>
     <UserProvider>
+    <StrictMode>
         <BrowserRouter>
                 <Routes>
                 <Route path='/profile' element={<Profile/>}/>
@@ -21,6 +22,7 @@ const AppRouter = () => {
                 <Route index element={<HomePage />}/> 
                 </Routes>
       </BrowserRouter>
+      </StrictMode>
       </UserProvider>
     </div>
   )

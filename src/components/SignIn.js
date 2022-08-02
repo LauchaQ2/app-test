@@ -4,15 +4,16 @@ import UserContext from '../context/UserContext';
 
 const SignIn = () => {
 
-  const {createUser,handleChangeForm, isLogin, userLogged} = useContext(UserContext);
+  const {createUser,handleChangeForm, isLogin, setLocalOk, localOk} = useContext(UserContext);
 
   let navigate = useNavigate();
     
   useEffect(() => {
     if(isLogin === true){
-      navigate('/profile') 
+      navigate('/profile')
+      setLocalOk(false)
       }
-  }, [userLogged]);
+  }, [localOk]);
 
 
   return (
