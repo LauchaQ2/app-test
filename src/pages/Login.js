@@ -20,7 +20,6 @@ const Login = () => {
     const handleLimit = (e) => {
       var regex = /[^0-9]/g;
       e.target.value = e.target.value.replace(regex, "");
-      setLimit(e.target.value)
     }
     
     
