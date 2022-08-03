@@ -50,7 +50,7 @@ const NavBar = () => {
                 <div onClick={handleMenuOpen} className={menuOpen ? "menu-btn open" : 'menu-btn'}>
                     <div className="menu-btn__burger"></div>
                 </div>
-                <div className={toogle ? "navbar-links":"navbar-links active"}>
+                <div className={toogle ? "navbar-links active":"navbar-links"}>
                     <ul>
                         {/* <li><a href="#">INICIO</a></li>
                 <li><a href="#logistica">LOGÍSTICA</a></li>
