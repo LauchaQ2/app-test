@@ -8,6 +8,8 @@ const NavBar = () => {
 
     const {userLogged, localOk,navbar, setNavbar} = useContext(UserContext);
 
+    const [toogle, setToogle] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
    
     useEffect(() => {
       setNavbar(localStorage.getItem('nav'))
@@ -15,7 +17,26 @@ const NavBar = () => {
       
     }, [localOk])
     
-   
+    const menuBtn = document.querySelector('.menu-btn');
+  
+    const handleMenuOpen = () =>{
+      setMenuOpen(!menuOpen)
+      setToogle(!toogle)
+    }
+    
+    
+
+    
+    window.onscroll = function() {scrollFunction()};
+    
+    function scrollFunction() {
+      if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
+        document.getElementById("brand-logo").style.width = "50px";
+      } else {
+        document.getElementById("brand-logo").style.width = "80px";
+      }
+    }
+    
 
 
     return (
@@ -26,10 +47,10 @@ const NavBar = () => {
                         <img id="brand-logo" src="https://res.cloudinary.com/dtsh7puzp/image/upload/v1659304572/v1ziflgcqdjv4ld8ws0m.png" alt="ac-brand" className="brand" />
                     </Link>
                 </div>
-                <div className="menu-btn">
+                <div onClick={handleMenuOpen} className={menuOpen ? "menu-btn open" : 'menu-btn'}>
                     <div className="menu-btn__burger"></div>
                 </div>
-                <div className="navbar-links">
+                <div className={toogle ? "navbar-links":"navbar-links active"}>
                     <ul>
                         {/* <li><a href="#">INICIO</a></li>
                 <li><a href="#logistica">LOGÍSTICA</a></li>

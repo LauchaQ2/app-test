@@ -99,6 +99,11 @@
         flex-direction: column;
         justify-content: flex-start;
     }
+    
+.box-right,
+.box-left {
+    padding: 18px;
+}
 
     .name-profile {
         font-size: 20px;
