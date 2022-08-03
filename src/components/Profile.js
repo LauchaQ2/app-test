@@ -6,7 +6,7 @@ import './Profile.css';
 
 const Profile = () => {
 
-    const { userLogged, addModal, setAddModal, setIsLogin, onChangePicture, refresh, setRefresh, update, someUp, loader, localOk, setLocalOk } = useContext(UserContext);
+    const {setNavbar, userLogged, addModal, setAddModal, setIsLogin, onChangePicture, refresh, setRefresh, update, someUp, loader, localOk, setLocalOk } = useContext(UserContext);
     let navigate = useNavigate();
 
 
@@ -16,6 +16,7 @@ const Profile = () => {
             navigate('/profile')
             setRefresh(false)
             setLocalOk(false)
+            setNavbar(true)
             setTimeout(() => {
                 setAddModal(false)
             }, 1500);
@@ -24,6 +25,7 @@ const Profile = () => {
 
     const clear = () => {
         setIsLogin(false);
+        setNavbar(false)
         console.log(userLogged)
         localStorage.clear();
         navigate('/');

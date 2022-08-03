@@ -9,6 +9,7 @@ const UserProvider = ({ children }) => {
   const [userLogged, setUserLogged] = useState(JSON.parse(localStorage.getItem('user')))
   const [localOk, setLocalOk] = useState(false)
   const [isLogin, setIsLogin] = useState(false)
+  const [navbar, setNavbar] = useState(localStorage.getItem('nav'))
   const [img, setImg] = useState({})
   const [someUp, setSomeUp] = useState(false)
   const [idUser, setIdUser] = useState()
@@ -34,7 +35,7 @@ const UserProvider = ({ children }) => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }
-
+  console.log('navbar', navbar)
   const [loader, setLoader] = useState(true);
 
 
@@ -62,6 +63,7 @@ const UserProvider = ({ children }) => {
       .then(response => {
         const data = { ...response.data }
         localStorage.setItem('user', JSON.stringify(data))
+        localStorage.setItem('nav', true)
         setUserLogged(data)
         const id = data.user.uid;
         setIdUser(id)
@@ -181,6 +183,8 @@ const UserProvider = ({ children }) => {
     setLocalOk,
     addModal,
     setAddModal,
+    navbar,
+    setNavbar
   }
 
   return (
