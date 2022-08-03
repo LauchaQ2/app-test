@@ -12,7 +12,10 @@ const UserProvider = ({ children }) => {
   const [img, setImg] = useState({})
   const [someUp, setSomeUp] = useState(false)
   const [idUser, setIdUser] = useState()
+  const [limit, setLimit] = useState('3')
   const [refresh, setRefresh] = useState(false);
+  const [addModal, setAddModal] = useState(false);
+  const [users, setUsers] = useState([])
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -33,6 +36,19 @@ const UserProvider = ({ children }) => {
   }
 
   const [loader, setLoader] = useState(true);
+
+
+  
+  const getUsers = async () => {
+    const res = await axios.get(`https://restserver-lautaro-quevedo.herokuapp.com/api/users?limit=${limit}`)
+    setUsers(res.data.users)
+  }
+
+  useEffect(() => {
+    getUsers()
+    console.log(users)
+  }, []);
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -86,8 +102,10 @@ const UserProvider = ({ children }) => {
         console.log(data)
         localStorage.setItem('user', JSON.stringify(data))
         setUserLogged(data)
+        setLocalOk(true)
         setRefresh(true)
         setSomeUp(false)
+        setAddModal(true)
         console.log(refresh)
       })
       .catch(err => {
@@ -96,7 +114,6 @@ const UserProvider = ({ children }) => {
   }
 
   const updateProfileImg = () => {
-    alert("Your file is being uploaded!")
     console.log(img)
     axios.put(`https://restserver-lautaro-quevedo.herokuapp.com/api/uploads/users/${idUser}`, img)
       .then(response => {
@@ -161,7 +178,9 @@ const UserProvider = ({ children }) => {
     loader,
     setLoader,
     localOk,
-    setLocalOk
+    setLocalOk,
+    addModal,
+    setAddModal,
   }
 
   return (

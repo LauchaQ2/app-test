@@ -76,9 +76,9 @@
 .navbarr {
     padding: 10px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
-    background-color: white;
+    background-color: rgb(0, 0, 0);
     color: white;
     width: 100%;
     overflow: hidden;
@@ -86,8 +86,7 @@
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 99;
-    border-bottom: 0.5px solid rgb(180, 180, 180);
+    z-index: 98;
 }
 
 .navbar-links {
@@ -107,12 +106,15 @@
 .navbar-links li a {
     display: block;
     text-decoration: none;
-    color: black;
+    color: rgb(255, 255, 255);
     padding: 1rem;
     padding-bottom: 0.5rem;
     font-family: 'Inter', sans-serif;
     font-weight: bold;
     
+}
+.link-routes{
+    text-decoration: none!important;
 }
 
 .navbar-links li:hover {
