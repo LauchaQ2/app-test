@@ -50,6 +50,10 @@ p{
   color: blue;
   font-size: 25px;
 }
+.error-message{
+  color: white;
+  font-size: 18px;
+}
 .center{
   text-align: center;
 }

@@ -9,7 +9,7 @@ import UserContext from '../context/UserContext';
 const Login = () => {
     
     
-    const {login,handleChange,isLogin,setLocalOk, localOk} = useContext(UserContext);
+    const {login,handleChange,isLogin,setLocalOk, localOk, error} = useContext(UserContext);
 
 
     
@@ -39,9 +39,11 @@ const Login = () => {
       <div className="App">
         <div className='containerform'>
         <><h1>Iniciar Sesión</h1><div className='form'>
-          <input className='input-forms' name='email' placeholder='E-mail' onChange={handleChange} />
+          <input className='input-forms' type='email' name='email' placeholder='E-mail' onChange={handleChange} />
           <input className='input-forms' type='password' name='password' placeholder='Contraseña' onChange={handleChange} />
           <button onClick={login}>Login</button>
+          {error ? <h6 className='error-message'>Email o contraseña incorrecta</h6> : null}
+
       </div>
       <Link to='/signin'>
       <p>¿No tenés cuenta? Hacé click y creala!</p>

@@ -18,9 +18,9 @@ const SignIn = () => {
 
   return (
     <div className='containerform'><h1>Crear usuario</h1><form className='form' onSubmit={createUser}>
-      <input className='input-forms' name='name' placeholder='Nombre' onChange={handleChangeForm} />
-      <input className='input-forms' name='email' placeholder='E-mail' onChange={handleChangeForm} />
-      <input className='input-forms' name='password' placeholder='Contraseña' onChange={handleChangeForm} />
+      <input className='input-forms' aria-errormessage='' type='text' name='name' placeholder='Nombre' onChange={handleChangeForm} />
+      <input className='input-forms' type='email' name='email' placeholder='E-mail' onChange={handleChangeForm} />
+      <input className='input-forms' type='password' name='password' placeholder='Contraseña' onChange={handleChangeForm} />
       <button>Sign in</button>
       <Link to='/'>
       <p>¿Ya tenés cuenta? Logueate!</p>

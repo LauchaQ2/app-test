@@ -21,6 +21,7 @@ const UserProvider = ({ children }) => {
     email: '',
     password: ''
   })
+  const [error, setError] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -71,14 +72,10 @@ const UserProvider = ({ children }) => {
         setLocalOk(true)
       })
       .catch(err => {
-        console.log(err.response.data.errors)
-        let er = err.response.data.errors;
-        if (er.lenght === 1) {
-          alert(er)
-        } er.map(error => {
-          alert(error.msg)
-        })
-      })
+        console.log(err)
+        let er = err;
+        setError(true)
+     })
   }
 
   const onChangePicture = (e) => {
@@ -186,7 +183,9 @@ const UserProvider = ({ children }) => {
     setAddModal,
     navbar,
     setNavbar,
-    img
+    img,
+    error,
+    setError
   }
 
   return (

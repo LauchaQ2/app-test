@@ -14,10 +14,10 @@ import Coupons from './Coupons/Coupons';
 
 const Profile = () => {
 
-    const { setNavbar, userLogged, addModal, img, setAddModal, setIsLogin, onChangePicture, refresh, setRefresh, update, someUp, loader, localOk, setLocalOk } = useContext(UserContext);
+    const { setNavbar, userLogged,setError, addModal, img, setAddModal, setIsLogin, onChangePicture, refresh, setRefresh, update, someUp, loader, localOk, setLocalOk } = useContext(UserContext);
     let navigate = useNavigate();
 
-    const [optionProfile, setOptionProfile] = useState();
+    const [optionProfile, setOptionProfile] = useState(1);
 
 
     useEffect(() => {
@@ -52,6 +52,7 @@ const Profile = () => {
     const clear = () => {
         setIsLogin(false);
         setNavbar(false)
+        setError(false)
         console.log(userLogged)
         localStorage.clear();
         navigate('/');
