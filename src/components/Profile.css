@@ -3,55 +3,90 @@
     background-color: white;
 }
 
-.box-right,
-.box-left {
-    padding: 20px;
+.profile {
+    margin-top: 94px;
 }
 
 .profile {
-    margin-top: 100px;
+    display: block;
+    width: 100%;
+    justify-content: center;
 }
-.name-profile{
+
+.profile-container {
+    display: flex;
+    width: 100%;
+}
+
+.name-profile {
     color: black;
+    margin-left: 50px;
 }
-.email-profile{
+
+.email-profile {
     color: black;
 }
 
 .box-left {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items: flex-start;
+    background-color: white;
+    width: 20%;
+    border-right: 1px solid black;
+    height: 70vh;
+}
+
+.box-left ul {
+    text-align: left;
+}
+
+.box-left ul li {
+    list-style: none;
+    margin-bottom: 20px;
+    font-size: 20px;
+    border-bottom: 0.5px solid rgb(94, 94, 94);
+}
+
+
+.box-right {
+    width: 80%;
+    height: 70vh;
 }
 
 .img-profile {
-    width: 180px;
-    height: 180px;
+    margin-left: 50px;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
     box-shadow: 0px 1px 3px 2px grey;
 }
-.modal-open{
+
+.modal-open {
     margin-top: -70px;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: block;
     position: fixed;
     background-color: rgba(58, 58, 58, 0.797);
     z-index: 99;
 }
-.modal-header{
+
+.modal-header {
     display: flex;
     justify-content: end;
 }
-.modal-body{
+
+.modal-body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 100vh;
     width: 100%;
 }
-.modal-close{
+
+.modal-close {
     display: none;
 }
 
@@ -66,26 +101,42 @@
 }
 
 .label-upload {
+    position: absolute;
+    top: 140px;
+    left: 130px;
     cursor: pointer;
     color: black;
     font-weight: 500;
-    padding: 8px;
-    border: 1px solid grey;
     background-color: white;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    font-size: 15px;
 }
 
 .label-upload2 {
+    position: absolute;
+    top: 140px;
+    left: 130px;
     cursor: pointer;
     color: black;
     font-weight: 500;
-    padding: 8px;
-    background-color: red;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    font-size: 15px;
+    background-color: grey;
+}
+
+.title-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    width: 100%;
+    border-bottom: 0.5px solid rgb(94, 94, 94);
+    font-family: 'Inter', sans-serif;
+}
+.img-upload{
+    width: 20px;
+    position: absolute;
+    top: 165px;
+    left: 130px;
+    background-color: grey;
+}
+.item-menu-profile{
+    cursor: pointer;
 }
 
 @media (max-width: 600px) {
@@ -99,11 +150,11 @@
         flex-direction: column;
         justify-content: flex-start;
     }
-    
-.box-right,
-.box-left {
-    padding: 18px;
-}
+
+    .box-right,
+    .box-left {
+        padding: 18px;
+    }
 
     .name-profile {
         font-size: 20px;

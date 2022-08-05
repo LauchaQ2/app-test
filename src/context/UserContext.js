@@ -10,7 +10,7 @@ const UserProvider = ({ children }) => {
   const [localOk, setLocalOk] = useState(false)
   const [isLogin, setIsLogin] = useState(false)
   const [navbar, setNavbar] = useState(localStorage.getItem('nav'))
-  const [img, setImg] = useState({})
+  const [img, setImg] = useState()
   const [someUp, setSomeUp] = useState(false)
   const [idUser, setIdUser] = useState()
   const [limit, setLimit] = useState('3')
@@ -108,6 +108,7 @@ const UserProvider = ({ children }) => {
         setRefresh(true)
         setSomeUp(false)
         setAddModal(true)
+        setImg(null)
         console.log(refresh)
       })
       .catch(err => {
@@ -184,7 +185,8 @@ const UserProvider = ({ children }) => {
     addModal,
     setAddModal,
     navbar,
-    setNavbar
+    setNavbar,
+    img
   }
 
   return (

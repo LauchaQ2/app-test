@@ -1,14 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react'
 import UserContext from '../context/UserContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Circles, Bars } from 'react-loader-spinner'
+import { Routes, BrowserRouter, Route, } from 'react-router-dom';
 import './Profile.css';
+import refreshLogo from '../assets/refresh.png'
+import Login from '../pages/Login';
+import HomePage from '../pages/HomePage';
+import AppRouter from './AppRouter';
+import InfoProfile from './InfoProfile/InfoProfile';
+import ShopHistory from './ShopHistory/ShopHistory';
+import Coupons from './Coupons/Coupons';
 
 const Profile = () => {
 
-    const {setNavbar, userLogged, addModal, setAddModal, setIsLogin, onChangePicture, refresh, setRefresh, update, someUp, loader, localOk, setLocalOk } = useContext(UserContext);
+    const { setNavbar, userLogged, addModal, img, setAddModal, setIsLogin, onChangePicture, refresh, setRefresh, update, someUp, loader, localOk, setLocalOk } = useContext(UserContext);
     let navigate = useNavigate();
 
+    const [optionProfile, setOptionProfile] = useState();
 
 
     useEffect(() => {
@@ -22,6 +31,23 @@ const Profile = () => {
             }, 1500);
         }
     }, [localOk]);
+
+    const renderSwitch = (optionProfile) => {
+        switch (optionProfile) {
+            case 1:
+                return <InfoProfile userLogged={userLogged} />
+                break;
+            case 2:
+                return <ShopHistory />
+                break;
+            case 3:
+                return <Coupons />
+                break;
+            default:
+                break;
+        }
+    }
+
 
     const clear = () => {
         setIsLogin(false);
@@ -38,17 +64,29 @@ const Profile = () => {
                     ?
                     <Bars />
                     :
-                    <><div className='box-left'>
-                        <img className='img-profile' src={!userLogged.user.img ? 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png' : userLogged.user.img || userLogged.img} />
+                    <><div className='title-container'>
                         <form className='form-picture' onSubmit={update}>
-                            <label className={someUp ? 'label-upload2' : 'label-upload'} for='upload'>Seleccionar imagen</label>
+                            <label className={someUp ? 'label-upload2' : 'label-upload'} for='upload'>📷</label>
                             <input onChange={onChangePicture} id='upload' className='select-file' type="file" />
-                            <button className='update-btn'>Actualizar</button>
+                            {img !== null ? <button className='update-btn'><img className='img-upload' src={refreshLogo} /></button> : null}
                         </form>
-                    </div><div className='box-right'>
-                            <h1 className='name-profile'>{userLogged.user.name || userLogged.name}</h1>
-                            <h3 className='email-profile'>{userLogged.user.email || userLogged.email}</h3>
-                        </div></>
+
+                        <img className='img-profile' src={!userLogged.user.img ? 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png' : userLogged.user.img || userLogged.img} />
+                        <h1 className='name-profile'>{userLogged.user.name || userLogged.name}</h1>
+                    </div>
+                        <div className='profile-container'>
+                            <div className='box-left'>
+                                <ul>
+                                    <li className='item-menu-profile' onClick={()=>{setOptionProfile(1)}}>Mi información</li>
+                                    <li className='item-menu-profile' onClick={()=>{setOptionProfile(2)}}>Mi historial de compras</li>
+                                    <li className='item-menu-profile' onClick={()=>{setOptionProfile(3)}}>Cupones</li>
+                                    <li className='item-menu-profile' onClick={clear}>Cerrar sesión</li>
+                                </ul>
+                            </div><div className='box-right'>
+                                {renderSwitch(optionProfile)}
+                            </div>
+                        </div>
+                    </>
             }
             <div className={addModal ? 'modal-open' : 'modal-close'}>
                 <div className='modal-header'>
@@ -60,7 +98,7 @@ const Profile = () => {
             </div>
 
         </div>
-            <button onClick={clear}>Cerrar sesión</button></div>)
+        </div>)
 }
 
 export default Profile
