@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
     margin-bottom: 20px;
     background-color: rgb(255, 255, 255);
     -webkit-box-shadow: 5px 5px 23px -10px rgba(62, 62, 62, 1);
@@ -12,16 +11,23 @@
     border-radius: 0px;
     background-color: white;
     width: 250px;
+    height: 380px;
 }
 .title-product{
+    margin: 0;
     text-align: center;
     font-size: 18px;
-    width: 200px;
-    color: black;
+    width: 100%;
+    color: white;
+    background-color: black;
 }
 .price-product{
-    color: green;
-    font-weight: 550;
+    color: black;
+    font-weight: 450;
     font-size: 20px;
-
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    background-color: grey;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }

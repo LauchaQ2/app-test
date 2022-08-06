@@ -74,7 +74,6 @@
 
 /*MENU NAVBAR */
 .navbarr {
-    padding: 10px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -84,7 +83,6 @@
     overflow: hidden;
     transition: 0.4s;
     position: fixed;
-    width: 100%;
     top: 0;
     z-index: 98;
 }

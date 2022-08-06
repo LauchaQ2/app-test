@@ -10,6 +10,8 @@ import HomePage from '../pages/HomePage';
 import InfoProfile from '../components/InfoProfile/InfoProfile'
 import ShopHistory from '../components/ShopHistory/ShopHistory'
 import Coupons from '../components/Coupons/Coupons'
+import ItemList from './ItemList/ItemList';
+import ItemDetailContainer from './ItemDetailContainer/ItemDetailContainer';
 
 
 
@@ -24,6 +26,8 @@ const AppRouter = () => {
         <BrowserRouter>
           <NavBar/>
                 <Routes>
+                <Route path='/products/:id' element={<ItemDetailContainer/>}/>
+                <Route path='/products' element={<ItemList/>}/>
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/profile' element={<Profile/>}/>
                 <Route path='/profile/information' element={<InfoProfile/>}/>

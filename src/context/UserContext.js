@@ -11,12 +11,15 @@ const UserProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false)
   const [navbar, setNavbar] = useState(localStorage.getItem('nav'))
   const [img, setImg] = useState()
+  const [products, setProducts] = useState([])
   const [someUp, setSomeUp] = useState(false)
   const [idUser, setIdUser] = useState()
   const [limit, setLimit] = useState('3')
   const [refresh, setRefresh] = useState(false);
   const [addModal, setAddModal] = useState(false);
   const [users, setUsers] = useState([])
+  const [orderProducts, setOrderProducts] = useState({});
+  const [sorted, setSorted] = useState()
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -129,6 +132,68 @@ const UserProvider = ({ children }) => {
         })
       })
   }
+  useEffect(() => {
+    const getProducts = async () => {
+        const res = await axios.get(`https://restserver-lautaro-quevedo.herokuapp.com/api/products?limit=20`)
+        const data = res.data.products
+        setProducts(data)
+      }
+      getProducts()
+      console.log(products)
+    }, []);
+
+  const  sortAZ = () =>{
+    const data = products.sort((a , b) => {
+      if (a.name > b.name) {
+          return 1;
+      }
+      if (a.name < b.name) {
+          return -1;
+      }
+      return 0;})
+      setOrderProducts(data)
+      setSorted(true)
+      console.log(orderProducts)
+  }
+  const  sortZA = () =>{
+    const data = products.sort((a , b) => {
+      if (a.name < b.name) {
+          return 1;
+      }
+      if (a.name > b.name) {
+          return -1;
+      }
+      return 0;})
+      setOrderProducts(data)
+      setSorted(true)
+      console.log(orderProducts)
+  }
+  const sortPriceExp = () =>{
+    const data = products.sort((a , b) => {
+      if (a.price < b.price) {
+          return 1;
+      }
+      if (a.price > b.price) {
+          return -1;
+      }
+      return 0;})
+      setOrderProducts(data)
+      setSorted(true)
+      console.log(orderProducts)
+  }
+  const sortPriceCheap = () =>{
+    const data = products.sort((a , b) => {
+      if (a.price > b.price) {
+          return 1;
+      }
+      if (a.price < b.price) {
+          return -1;
+      }
+      return 0;})
+      setOrderProducts(data)
+      setSorted(true)
+      console.log(orderProducts)
+  }
 
 
   const createUser = (event) => {
@@ -185,7 +250,16 @@ const UserProvider = ({ children }) => {
     setNavbar,
     img,
     error,
-    setError
+    setError,
+    products,
+    sortAZ,
+    sorted,
+    setProducts,
+    orderProducts,
+    sortZA,
+    setSorted,
+    sortPriceExp,
+    sortPriceCheap
   }
 
   return (

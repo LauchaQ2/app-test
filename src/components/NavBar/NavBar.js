@@ -24,19 +24,7 @@ const NavBar = () => {
       setToogle(!toogle)
     }
     
-    
 
-    
-    window.onscroll = function() {scrollFunction()};
-    
-    function scrollFunction() {
-      if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
-        document.getElementById("brand-logo").style.width = "50px";
-      } else {
-        document.getElementById("brand-logo").style.width = "80px";
-      }
-    }
-    
 
 
     return (
@@ -57,6 +45,9 @@ const NavBar = () => {
                 <li><a href="#nosotros">NOSOTROS</a></li>
                 <li><a href="#contacto">CONTACTO</a></li>
                 <li><a href="#ubicacion">UBICACIÓN</a></li> */}
+                <Link className='link-routes' to='/products'>
+                            <li><a>PRODUCTOS</a></li>
+                        </Link>
                         <Link className='link-routes' to={navbar ? '/profile' : '/login'}>
                             <li><a>{navbar ? 'MI CUENTA' : 'LOGIN'}</a></li>
                         </Link>

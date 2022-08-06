@@ -2,6 +2,44 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    background-color: white;
+    margin-top: 80px;
+}
+.list-products{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
     padding: 50px;
     background-color: white;
+}
+.banner{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(to right, darkblue, darkred);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.filter-group{
+    top: 110px;
+    left: 50px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+.display-none{
+    display:none;
+}
+.filter-group button{
+    margin: 0;
+    border: 1px solid black;
+    background-color: white;
+}
+.filter-button{
+    top: 80px;
+    left: 50px;
+    position: absolute;
+    width: 100px;    
+    border: 1px solid black;
+    border-radius: 0;
 }
