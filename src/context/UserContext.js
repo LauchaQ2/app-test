@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+  const [productCarts, setProductsCart] = useState([])
   const [userLogged, setUserLogged] = useState(JSON.parse(localStorage.getItem('user')))
   const [localOk, setLocalOk] = useState(false)
   const [isLogin, setIsLogin] = useState(false)
@@ -43,7 +44,7 @@ const UserProvider = ({ children }) => {
   const [loader, setLoader] = useState(true);
 
 
-  
+
   const getUsers = async () => {
     const res = await axios.get(`https://restserver-lautaro-quevedo.herokuapp.com/api/users?limit=${limit}`)
     setUsers(res.data.users)
@@ -78,7 +79,7 @@ const UserProvider = ({ children }) => {
         console.log(err)
         let er = err;
         setError(true)
-     })
+      })
   }
 
   const onChangePicture = (e) => {
@@ -134,65 +135,69 @@ const UserProvider = ({ children }) => {
   }
   useEffect(() => {
     const getProducts = async () => {
-        const res = await axios.get(`https://restserver-lautaro-quevedo.herokuapp.com/api/products?limit=20`)
-        const data = res.data.products
-        setProducts(data)
-      }
-      getProducts()
-      console.log(products)
-    }, []);
+      const res = await axios.get(`https://restserver-lautaro-quevedo.herokuapp.com/api/products?limit=20`)
+      const data = res.data.products
+      setProducts(data)
+    }
+    getProducts()
+    console.log(products)
+  }, []);
 
-  const  sortAZ = () =>{
-    const data = products.sort((a , b) => {
+  const sortAZ = () => {
+    const data = products.sort((a, b) => {
       if (a.name > b.name) {
-          return 1;
+        return 1;
       }
       if (a.name < b.name) {
-          return -1;
+        return -1;
       }
-      return 0;})
-      setOrderProducts(data)
-      setSorted(true)
-      console.log(orderProducts)
+      return 0;
+    })
+    setOrderProducts(data)
+    setSorted(true)
+    console.log(orderProducts)
   }
-  const  sortZA = () =>{
-    const data = products.sort((a , b) => {
+  const sortZA = () => {
+    const data = products.sort((a, b) => {
       if (a.name < b.name) {
-          return 1;
+        return 1;
       }
       if (a.name > b.name) {
-          return -1;
+        return -1;
       }
-      return 0;})
-      setOrderProducts(data)
-      setSorted(true)
-      console.log(orderProducts)
+      return 0;
+    })
+    setOrderProducts(data)
+    setSorted(true)
+    console.log(orderProducts)
   }
-  const sortPriceExp = () =>{
-    const data = products.sort((a , b) => {
+  const sortPriceExp = () => {
+    const data = products.sort((a, b) => {
       if (a.price < b.price) {
-          return 1;
+        return 1;
       }
       if (a.price > b.price) {
-          return -1;
+        return -1;
       }
-      return 0;})
-      setOrderProducts(data)
-      setSorted(true)
-      console.log(orderProducts)
+      return 0;
+    })
+    setOrderProducts(data)
+    setSorted(true)
+    console.log(orderProducts)
   }
-  const sortPriceCheap = () =>{
-    const data = products.sort((a , b) => {
+  const sortPriceCheap = () => {
+    const data = products.sort((a, b) => {
       if (a.price > b.price) {
-          return 1;
+        return 1;
       }
       if (a.price < b.price) {
-          return -1;
+        return -1;
       }
-      return 0;})
-      setOrderProducts(data)
-      setSorted(true)
-      console.log(orderProducts)
+      return 0;
+    })
+    setOrderProducts(data)
+    setSorted(true)
+    console.log(orderProducts)
   }
 
 
@@ -223,7 +228,30 @@ const UserProvider = ({ children }) => {
       })
   }
 
+  function isInCart(id) {
+    return productCarts.some(productCart => productCart.id === id);
+  }
 
+
+  const addProducts = (productCart, quantity) => {
+    if (isInCart(productCart.id)) {
+      const newAddProducts = productCarts.map(currentElement => {
+        if (currentElement.id === productCart.id) {
+          console.log("el current tiene", currentElement.quantity)
+          return { ...currentElement, quantity: currentElement.quantity + quantity }
+        } else return currentElement
+      })
+      setProductsCart(newAddProducts)
+    } else {
+      setProductsCart(prev => [...prev, { ...productCart, quantity }]);
+    }
+  }
+
+  const totalPrice = productCarts.reduce(function (acc, curr) {
+    return acc + curr.quantity * curr.price;
+  }, 0);
+
+  console.log(productCarts)
   const data = {
     login,
     handleChange,
@@ -259,7 +287,10 @@ const UserProvider = ({ children }) => {
     sortZA,
     setSorted,
     sortPriceExp,
-    sortPriceCheap
+    sortPriceCheap,
+    addProducts,
+    productCarts,
+    totalPrice
   }
 
   return (

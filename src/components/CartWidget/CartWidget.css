@@ -1,0 +1,11 @@
+.cart-widget{
+    background-color: red;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    text-align: center;
+    padding: 2px;
+}

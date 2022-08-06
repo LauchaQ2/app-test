@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import './NavBar.css'
 import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
+import CartWidget from '../CartWidget/CartWidget';
 
 
 const NavBar = () => {
@@ -50,6 +51,9 @@ const NavBar = () => {
                         </Link>
                         <Link className='link-routes' to={navbar ? '/profile' : '/login'}>
                             <li><a>{navbar ? 'MI CUENTA' : 'LOGIN'}</a></li>
+                        </Link>
+                        <Link className='link-routes' to='/cart'>
+                        <li> <a> <CartWidget/></a> </li>
                         </Link>
                     </ul>
                 </div>

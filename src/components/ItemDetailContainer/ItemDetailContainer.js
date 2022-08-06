@@ -1,35 +1,65 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Bars } from 'react-loader-spinner';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import Item from '../Item/Item';
 import ItemDetail from '../ItemDetail/ItemDetail';
 
 const ItemDetailContainer = () => {
 
-  const { products, setProducts } = useContext(UserContext);
+  const { } = useContext(UserContext);
+  
+  const [products, setProducts] =useState({})
+  const [product, setProduct] =useState({})
+  const [relatedProducts, setRelateProducts] = useState({});
+  const [loader, setLoader] = useState(true);
   const {id} = useParams();
+  let navigate = useNavigate();
   localStorage.setItem('id', id)
-  var ide = localStorage.getItem('id')
-  var product = products.find(prod => prod._id === ide)
-  localStorage.setItem('product', JSON.stringify(product))
-  product = JSON.parse(localStorage.getItem('product'))
-  const relatedProduct = products.filter(prod => prod._id !== ide)
-  console.log(product)
-  console.log(relatedProduct)
+
+  const getProducts = async() => {
+    const res = await axios.get(`https://restserver-lautaro-quevedo.herokuapp.com/api/products?limit=20`)
+    const res2= await axios.get(`https://restserver-lautaro-quevedo.herokuapp.com/api/products/${id}`)
+    const data = res.data.products
+    const produc = res2.data
+    setProduct(produc)
+    console.log(product)
+    const related = data.filter(prod => prod._id !== id)
+    setRelateProducts(related)
+    console.log(relatedProducts)
+  }
+
+
+  useEffect(() => {
+    getProducts()
+      setTimeout(() => {
+        setLoader(false)
+      }, 2000);
+  }, [id]);
 
 
   return (
     <div>
-      <ItemDetail product={product}/>
+    {loader?
+      <div className='cont-loader'>
+      <Bars/>
+      </div>
+      :
+    <>
+      <ItemDetail loader={loader} product={product}/>
       <h2  className='center'>Otros productos que podrian interesarte...</h2>
       <div className='list-products'>
-        {relatedProduct.map(product=>{
+        {relatedProducts.map(product=>{
           return (
-            <Item product={product}/>
+            <Item key={product._id} product={product}/>
             )
         })}
       </div>
+      </>
+    }
+
+    
     </div>
   )
 }

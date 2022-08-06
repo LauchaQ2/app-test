@@ -95,6 +95,7 @@
     display: flex;
     margin-right: 0;
     padding: 0;
+    align-items: center;
 }
 
 .navbar-links li {
@@ -106,18 +107,13 @@
     text-decoration: none;
     color: rgb(255, 255, 255);
     padding: 1rem;
-    padding-bottom: 0.5rem;
     font-family: 'Inter', sans-serif;
     font-weight: bold;
-    
 }
 .link-routes{
     text-decoration: none!important;
 }
 
-.navbar-links li:hover {
-    border-bottom: 1px solid black;
-}
 
 /* ANIMATION */
 .menu-btn.open .menu-btn__burger {

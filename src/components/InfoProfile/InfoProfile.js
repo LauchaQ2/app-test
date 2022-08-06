@@ -3,7 +3,7 @@ import video1 from '../../assets/video1.mp4'
 
 const InfoProfile = ({userLogged}) => {
   return (
-    <div className='center'>
+    <div className='container-full'>
     <h2>MI INFORMACIÓN PERSONAL</h2>
     <label>Nombre</label>
     <input value={userLogged.user.name} readOnly={true}/>

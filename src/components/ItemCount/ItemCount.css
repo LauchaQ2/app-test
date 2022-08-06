@@ -1,0 +1,36 @@
+.btn2{
+    margin: 0;
+    width: 20px;
+    height: 20px;
+}
+.count-mobile{
+    width: 30px!important;
+    height: 30px!important;
+    text-align: center;
+    padding: 1px;
+    font-size: 19px;
+    border: 1px solid black;
+    z-index: 0!important;
+    margin: 0;
+}
+.group-btn input{
+    width: 26px!important;
+    height: 26px!important;
+}
+.chart{
+    min-width: 0px;
+    height: 100%;
+    padding: 2px!important;
+    background-color: rgb(53, 53, 53)!important;
+    color: white!important;
+    border-radius: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.container-btn-count{
+    padding: 10px;
+}
+.group-btn{
+    height: fit-content;
+}

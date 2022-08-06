@@ -71,7 +71,6 @@ const Profile = () => {
                             <input onChange={onChangePicture} id='upload' className='select-file' type="file" />
                             {img !== null ? <button className='update-btn'><img className='img-upload' src={refreshLogo} /></button> : null}
                         </form>
-
                         <img className='img-profile' src={!userLogged.user.img ? 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png' : userLogged.user.img || userLogged.img} />
                         <h1 className='name-profile'>{userLogged.user.name || userLogged.name}</h1>
                     </div>
