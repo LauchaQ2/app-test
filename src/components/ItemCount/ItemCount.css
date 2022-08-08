@@ -12,6 +12,7 @@
     border: 1px solid black;
     z-index: 0!important;
     margin: 0;
+    border-radius: 0;
 }
 .group-btn input{
     width: 26px!important;

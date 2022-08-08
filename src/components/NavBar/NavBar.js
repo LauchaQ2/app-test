@@ -3,12 +3,12 @@ import './NavBar.css'
 import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import CartWidget from '../CartWidget/CartWidget';
+import CartModal from '../CartModal/CartModal';
 
 
 const NavBar = () => {
 
-    const {userLogged, localOk,navbar, setNavbar} = useContext(UserContext);
-
+    const {userLogged, localOk,navbar, setNavbar,cartOpen, handleCartOpen, handleCartClose} = useContext(UserContext);
     const [toogle, setToogle] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
    
@@ -25,7 +25,7 @@ const NavBar = () => {
       setToogle(!toogle)
     }
     
-
+    
 
 
     return (
@@ -52,12 +52,11 @@ const NavBar = () => {
                         <Link className='link-routes' to={navbar ? '/profile' : '/login'}>
                             <li><a>{navbar ? 'MI CUENTA' : 'LOGIN'}</a></li>
                         </Link>
-                        <Link className='link-routes' to='/cart'>
                         <li> <a> <CartWidget/></a> </li>
-                        </Link>
                     </ul>
                 </div>
             </nav>
+            {cartOpen ? <CartModal handleCartClose={handleCartClose}/> : null}
         </div>
     )
 }

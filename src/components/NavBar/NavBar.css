@@ -84,7 +84,7 @@
     transition: 0.4s;
     position: fixed;
     top: 0;
-    z-index: 98;
+    z-index: 1;
 }
 
 .navbar-links {

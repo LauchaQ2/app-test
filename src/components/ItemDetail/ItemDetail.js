@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './ItemDetail.css'
 import { Bars } from 'react-loader-spinner';
+import UserContext from '../../context/UserContext';
+import ItemCount from '../ItemCount/ItemCount';
 
 
 const ItemDetail = ({ product, loader }) => {
+
+    const { addProducts } = useContext(UserContext);
+
+    const itemCart = {
+        name: product.name,
+        id: product._id,
+        price: product.price,
+        img: product.img,
+        quantity: 1,
+    }
+    
+    const onAdd = (quantity) => {
+      addProducts(itemCart, quantity)}
+    
 
     return (
         <div className='product-container'>
@@ -17,8 +33,7 @@ const ItemDetail = ({ product, loader }) => {
                 <div className='col-detail-product'>
                     <h1>${product.price}ARS</h1>
                     <div className='add-buttons'>
-                        <input className='count' type='number'/>
-                        <button className='btn-add'>AGREGAR AL CARRITO</button>
+                        <ItemCount onAdd={onAdd}/>
                     </div>
                 </div>
             </div>

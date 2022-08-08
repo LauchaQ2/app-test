@@ -1,19 +1,20 @@
-import React, {useEffect, useContext} from 'react'
+import React, {useEffect, useContext, useState} from 'react'
 import './CartWidget.css'
 import UserContext from '../../context/UserContext';
+import CartModal from '../CartModal/CartModal';
 
-const CartWidget = ({size}) => {
+const CartWidget = () => {
 
-    const {productCarts} = useContext(UserContext)
+    const {productCarts,handleCartOpen} = useContext(UserContext)
 
     const totalProducts = productCarts.map(productCart => productCart.quantity).reduce((prev, curr) => prev + curr, 0);
 
-    
-
     return(
-        <div className='cart-widget'>
+        <>
+        <div onClick={()=>{handleCartOpen()}} className='cart-widget'>
         {totalProducts}
         </div>
+        </>
     )
 }
 

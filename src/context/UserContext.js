@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
+  const [cartOpen, setCartOpen] = useState(false)
   const [productCarts, setProductsCart] = useState([])
   const [userLogged, setUserLogged] = useState(JSON.parse(localStorage.getItem('user')))
   const [localOk, setLocalOk] = useState(false)
@@ -251,6 +252,35 @@ const UserProvider = ({ children }) => {
     return acc + curr.quantity * curr.price;
   }, 0);
 
+  const handleCartOpen = () =>{
+    setCartOpen(true)
+}
+const handleCartClose = () =>{
+    setCartOpen(false)
+}   
+
+const clearCart = () => setProducts([]);
+    
+const removeItem = (id, quantity) => {
+    const ProductExist = productCarts.find(productCart=>productCart.id === id)
+    if (ProductExist.quantity === 1){
+      setProductsCart(productCarts.filter(productCart=>productCart.id !==id));
+}else{
+  setProductsCart(productCarts.map(productCart => productCart.id === id 
+        ? {...ProductExist, quantity: ProductExist.quantity - 1}:
+        productCart))
+}
+}
+
+const addItem = (id, quantity) => {
+    const ProductExist = productCarts.find(productCart=>productCart.id === id)
+    if (ProductExist.quantity > 0){
+      setProductsCart(productCarts.map(productCart => productCart.id === id 
+            ? {...ProductExist, quantity: ProductExist.quantity + 1}:
+            productCart))
+}
+}
+
   console.log(productCarts)
   const data = {
     login,
@@ -290,7 +320,13 @@ const UserProvider = ({ children }) => {
     sortPriceCheap,
     addProducts,
     productCarts,
-    totalPrice
+    totalPrice,
+    cartOpen,
+    handleCartOpen,
+    handleCartClose,
+    removeItem,
+    addItem,
+    clearCart
   }
 
   return (

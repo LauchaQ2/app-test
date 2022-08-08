@@ -1,0 +1,128 @@
+.cart-container {
+    position: fixed;
+    width: 50%;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: rgb(255, 255, 255);
+    right: 0;
+    top: 0;
+    z-index: 100;
+    border: 2px solid black;
+}
+.header-modal{
+    width: 100%;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+.header-modal span{
+    padding: 10px;
+    font-size: 25px;
+}
+.btn-close{
+    cursor: pointer;
+    font-size: 20px;
+    color: red;
+    font-weight: 500;
+}
+.shade{
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.801);
+    z-index: 80;
+}
+.card-cart-product{
+    display: flex;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.card-img-product{
+    background-color: rgb(186, 186, 186);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+
+}
+.card-img-product img {
+    width: 60%;
+    border-radius: 0;
+}
+.card-detail-product{
+    padding-left: 10px;
+    padding-bottom: 10px;
+    background-color: rgb(117, 117, 117);
+    width: 80%;
+    border-bottom: 2px solid red;
+    border-top: 2px solid red;
+}
+.card-detail-product p{
+    color: black;
+    font-size: 20px;
+    margin: 0;
+    padding: 10px;
+}
+.cart-title-group{
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding-left: 20px;
+}
+.body-modal{
+    overflow-x: hidden;
+    margin-bottom: 60px;
+}
+.card-detail-product .group-btn{
+    padding: 10px; 
+}
+.card-detail-product .group-btn input{
+    text-align:center; 
+}
+.card-detail-product .group-btn button{
+box-shadow: none;
+}
+.footer-modal{
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    border: 2px solid black;
+}
+.footer-modal p{
+    margin: 0;
+    padding: 10px;
+    padding-left: 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: black;
+}
+@media (max-width: 600px) {
+    .cart-container{
+        width: 100%;
+    }
+    .footer-modal{
+        width: 100%;
+        border-left: 2px solid black;
+    }
+    .card-img-product{
+        width: 30%;
+    }
+    .card-detail-product{
+        width: 70%;
+    }
+    .cart-title-group li{
+        font-size: 20px;
+        font-weight: 550;
+    }
+}
+

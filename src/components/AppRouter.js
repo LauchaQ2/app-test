@@ -1,8 +1,8 @@
-import React, { StrictMode } from 'react'
+import React, { StrictMode, useContext } from 'react'
 import { Routes, BrowserRouter, Route,  } from 'react-router-dom';
 import Login from '../pages/Login';
 import SignIn from './SignIn';
-import { UserProvider } from '../context/UserContext';
+import UserContext, { UserProvider } from '../context/UserContext';
 import Profile from './Profile';
 import NavBar from './NavBar/NavBar';
 import Footer from './Footer/Footer';
@@ -17,7 +17,6 @@ import Cart from './Cart/Cart';
 
 
 const AppRouter = () => {
-
 
 
   return (
