@@ -1,45 +1,69 @@
-.list-container{
+.list-container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     background-color: white;
     margin-top: 100px;
 }
-.list-products{
+
+.list-products {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 50px;
     background-color: white;
 }
-.banner{
+
+.banner {
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(to right, darkblue, darkred);
+    background-image: url('../../assets/kimetsu-no-yaiba-anime-4k-yn-2560x1600.jpg');
     display: flex;
     justify-content: center;
     align-items: center;
+    background-size: cover;
+    animation-name: MOVE-BG;
+    animation-duration: 60s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation: bg-slide 20s linear infinite;
+    position: absolute;
+    z-index: 0;
 }
-.filter-group{
+@media (max-width: 600px) {
+    .banner {
+        background-position: center;
+    }
+    @keyframes bg-slide {
+        0%{background-position: -300px 0;}
+        50%{background-position: -700px 0;}
+        100%{background-position: -300 0;}
+}
+}
+
+.filter-group {
     top: 140px;
     left: 50px;
     position: absolute;
     display: flex;
     flex-direction: column;
 }
-.display-none{
-    display:none;
+
+.display-none {
+    display: none;
 }
-.filter-group button{
+
+.filter-group button {
     margin: 0;
     border: 1px solid black;
     background-color: white;
 }
-.filter-button{
+
+.filter-button {
     top: 110px;
     left: 50px;
     position: absolute;
-    width: 100px;    
+    width: 100px;
     border: 1px solid black;
     border-radius: 0;
 }
