@@ -28,7 +28,6 @@
     animation-iteration-count: infinite;
     animation: bg-slide 20s linear infinite;
     position: absolute;
-    z-index: 0;
 }
 @media (max-width: 600px) {
     .banner {

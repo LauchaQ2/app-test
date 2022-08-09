@@ -11,7 +11,7 @@
     text-align: center;
     position: absolute;
     z-index: 3;
-    right: 80px;
+    right: 170px;
     top: 10px;
 }
 .fa-lg{
@@ -23,6 +23,8 @@
     
     .cart-widget{
         top: 5px;
+        right: 80px;
+
     }
     
 }
