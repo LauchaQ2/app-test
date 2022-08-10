@@ -11,7 +11,7 @@ const CartModal = ({ handleCartClose }) => {
 
 
     const buy = async () => {
-        const response = await axios.post('http://localhost:8080/api/products/payment', productCarts)
+        const response = await axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/products/payment', productCarts)
             .then(res => {
                 var ids = res.data.preferenceId;
                 setPreferenceId(ids)
@@ -64,7 +64,7 @@ const CartModal = ({ handleCartClose }) => {
                 })}
                 <div className='footer-modal'>
                     {productCarts.length !== 0 && <p>TOTAL: {totalPrice}</p>}
-                    <button type='button' onClick={() => { buy() }}>
+                    <button onClick={() => { buy() }}>
                         Pagar
                     </button>
 
