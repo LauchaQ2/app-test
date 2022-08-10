@@ -64,7 +64,7 @@ const CartModal = ({ handleCartClose }) => {
                 })}
                 <div className='footer-modal'>
                     {productCarts.length !== 0 && <p>TOTAL: {totalPrice}</p>}
-                    <button onClick={() => { buy() }}>
+                    <button type='button' onClick={() => { buy() }}>
                         Pagar
                     </button>
 
