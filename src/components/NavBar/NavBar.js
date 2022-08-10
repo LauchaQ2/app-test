@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import CartWidget from '../CartWidget/CartWidget';
 import CartModal from '../CartModal/CartModal';
+import logo from '../../assets/Mangavedo.png'
 
 
 const NavBar = () => {
@@ -41,7 +42,7 @@ const NavBar = () => {
             <nav id="navbarr" className="navbarr">
                 <div id="logo-container" className="logo-container">
                     <Link to='/'>
-                        <img id="brand-logo" src="https://res.cloudinary.com/dtsh7puzp/image/upload/v1659304572/v1ziflgcqdjv4ld8ws0m.png" alt="ac-brand" className="brand" />
+                        <img id="brand-logo" src={logo} alt="ac-brand" className="brand" />
                     </Link>
                 </div>
                 {size < 600 && <CartWidget/>}
