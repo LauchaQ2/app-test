@@ -122,6 +122,17 @@
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: black;
 }
+#button-mp{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+button{
+    overflow-y: hidden;
+}
+.mercadopago-button {
+    line-height: 0;
+}
 
 @media (max-width: 600px) {
     .cart-container {

@@ -11,11 +11,11 @@ const CartWidget = () => {
     const totalProducts = productCarts.map(productCart => productCart.quantity).reduce((prev, curr) => prev + curr, 0);
 
     return (
-        <>  <i class="fa-solid fa-cart-shopping fa-lg"></i>
-            <div onClick={() => { handleCartOpen() }} className='cart-widget'>
+        <div onClick={() => { handleCartOpen() }} className='cont-widget'>  <i class="fa-solid fa-cart-shopping fa-lg"></i>
+            <div className='cart-widget'>
                 {totalProducts}
             </div>
-        </>
+        </div>
     )
 }
 

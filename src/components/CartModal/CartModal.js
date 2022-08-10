@@ -19,11 +19,15 @@ const CartModal = ({ handleCartClose }) => {
                 // The source domain must be completed according to the site for which you are integrating.
                 // For example: for Argentina ".com.ar" or for Brazil ".com.br".
                 var script = document.createElement("script");
+                var h1 = document.createElement("h3")
                 script.src = "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
                 script.type = "text/javascript";
                 script.setAttribute('data-preference-id', ids);;
-                document.getElementById("page-content").innerHTML = "";
-                document.querySelector("#page-content").appendChild(script);
+                document.getElementById("button-mp").innerHTML = "";
+                var y = document.createTextNode("Serás direccionado a MercadoPago...");
+                h1.appendChild(y)
+                document.querySelector("#button-mp").appendChild(h1);
+                document.querySelector("#button-mp").appendChild(script);
             })
             .catch(err => {
                 console.log(err)
@@ -64,10 +68,11 @@ const CartModal = ({ handleCartClose }) => {
                 })}
                 <div className='footer-modal'>
                     {productCarts.length !== 0 && <p>TOTAL: {totalPrice}</p>}
+                    <div id='button-mp'>
                     <button onClick={() => { buy() }}>
-                        Pagar
+                        FINALIZAR COMPRA
                     </button>
-
+                    </div>
                 </div>
             </div>
         </div></>

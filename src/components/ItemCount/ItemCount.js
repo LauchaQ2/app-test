@@ -39,7 +39,7 @@ export default function ItemCount({ onAdd }) {
             </div>
             <div className='d-flex f justify-content-center center'>
                 <button className="btn chart border" onClick={() => { onAdd(counter); }}>
-                    COMPRAR
+                    AÑADIR AL CARRITO
                 </button>
             </div>
         </div>
