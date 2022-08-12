@@ -1,13 +1,15 @@
 import { faVenusMars } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import React, { useContext, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import UserContext from '../../context/UserContext'
 import './CartModal.css'
 
 const CartModal = ({ handleCartClose }) => {
 
-    const { productCarts, totalPrice, removeItem, addItem, clearCart } = useContext(UserContext)
+    const { productCarts, totalPrice, removeItem, addItem, clearCart, userLogged } = useContext(UserContext)
     const [preferenceId, setPreferenceId] = useState()
+    let navigate = useNavigate();
 
 
     const buy = async () => {
@@ -28,6 +30,28 @@ const CartModal = ({ handleCartClose }) => {
                 h1.appendChild(y)
                 document.querySelector("#button-mp").appendChild(h1);
                 document.querySelector("#button-mp").appendChild(script);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    
+    const shopping = async () => {
+        var prod = productCarts.map(product=>{
+            return {...product, _id: product.id}
+        })
+        console.log(prod)
+        const data = {
+            products: prod,
+        }
+        const headers = {
+            "Content-Type": "application/json",
+            'x-token': userLogged.token
+        }   
+        const response = await axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/shopping', data, {headers})
+            .then(res => {
+                console.log(res)
+                navigate('/')
             })
             .catch(err => {
                 console.log(err)
@@ -69,7 +93,7 @@ const CartModal = ({ handleCartClose }) => {
                 <div className='footer-modal'>
                     {productCarts.length !== 0 && <p>TOTAL: {totalPrice}</p>}
                     <div id='button-mp'>
-                    <button onClick={() => { buy() }}>
+                    <button onClick={() => { shopping() }}>
                         FINALIZAR COMPRA
                     </button>
                     </div>

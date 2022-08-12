@@ -17,6 +17,7 @@ const UserProvider = ({ children }) => {
   const [someUp, setSomeUp] = useState(false)
   const [idUser, setIdUser] = useState()
   const [limit, setLimit] = useState('3')
+  const [token, setToken] = useState("")
   const [refresh, setRefresh] = useState(false);
   const [addModal, setAddModal] = useState(false);
   const [users, setUsers] = useState([])
@@ -68,10 +69,12 @@ const UserProvider = ({ children }) => {
     await axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/auth/login', user)
       .then(response => {
         const data = { ...response.data }
+        const tok = response.data.token;
         localStorage.setItem('user', JSON.stringify(data))
         localStorage.setItem('nav', true)
         setUserLogged(data)
         const id = data.user.uid;
+        console.log(userLogged)
         setIdUser(id)
         setIsLogin(true)
         setLocalOk(true)
