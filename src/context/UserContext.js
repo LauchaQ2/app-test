@@ -15,7 +15,7 @@ const UserProvider = ({ children }) => {
   const [img, setImg] = useState()
   const [products, setProducts] = useState([])
   const [someUp, setSomeUp] = useState(false)
-  const [idUser, setIdUser] = useState()
+  const [idUser, setIdUser] = useState(localStorage.getItem('userId'))
   const [limit, setLimit] = useState('3')
   const [token, setToken] = useState("")
   const [refresh, setRefresh] = useState(false);
@@ -76,6 +76,7 @@ const UserProvider = ({ children }) => {
         const id = data.user.uid;
         console.log(userLogged)
         setIdUser(id)
+        localStorage.setItem('userId', data.user.uid)
         setIsLogin(true)
         setLocalOk(true)
       })
@@ -262,7 +263,7 @@ const handleCartClose = () =>{
     setCartOpen(false)
 }   
 
-const clearCart = () => setProducts([]);
+const clearCart = () => setProductsCart([]);
     
 const removeItem = (id, quantity) => {
     const ProductExist = productCarts.find(productCart=>productCart.id === id)
@@ -329,7 +330,8 @@ const addItem = (id, quantity) => {
     handleCartClose,
     removeItem,
     addItem,
-    clearCart
+    clearCart,
+    idUser
   }
 
   return (

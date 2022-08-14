@@ -1,0 +1,26 @@
+.container-full{
+    margin-bottom: 50px;
+}
+.badge-product{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+.cont-shopping{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.cont-shopping h3{
+    margin: 0;
+    margin-bottom: 10px;
+}
+.badge-shopping{
+    background-color: rgb(183, 221, 255);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    -webkit-box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.75);
+    box-shadow: 1px 1px 6px 1px rgba(0,0,0,0.75);
+}

@@ -11,14 +11,26 @@ import AppRouter from './AppRouter';
 import InfoProfile from './InfoProfile/InfoProfile';
 import ShopHistory from './ShopHistory/ShopHistory';
 import Coupons from './Coupons/Coupons';
+import axios from 'axios';
 
 const Profile = () => {
 
-    const { setNavbar, userLogged,setError, addModal, img, setAddModal, setIsLogin, onChangePicture, refresh, setRefresh, update, someUp, loader, localOk, setLocalOk } = useContext(UserContext);
+    const { setNavbar, userLogged,setError,idUser, addModal, img, setAddModal, setIsLogin, onChangePicture, refresh, setRefresh, update, someUp, loader, localOk, setLocalOk } = useContext(UserContext);
     let navigate = useNavigate();
 
     const [optionProfile, setOptionProfile] = useState(1);
-
+    const [shoppings, setShoppings] = useState([])
+    
+    useEffect(() => {
+        const getShoppingsById = async () => {
+          const res = await axios.get(`https://restserver-lautaro-quevedo.herokuapp.com/api/shopping/${idUser}`)
+          const data = res.data
+          console.log(data)
+          setShoppings(data)
+        }
+        getShoppingsById()
+        console.log(shoppings)
+      }, []);
 
     useEffect(() => {
         if (refresh === true) {
@@ -38,7 +50,7 @@ const Profile = () => {
                 return <InfoProfile userLogged={userLogged} />
                 break;
             case 2:
-                return <ShopHistory />
+                return <ShopHistory shoppings={shoppings} />
                 break;
             case 3:
                 return <Coupons />

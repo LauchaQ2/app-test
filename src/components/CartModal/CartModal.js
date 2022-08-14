@@ -10,6 +10,7 @@ const CartModal = ({ handleCartClose }) => {
     const { productCarts, totalPrice, removeItem, addItem, clearCart, userLogged } = useContext(UserContext)
     const [preferenceId, setPreferenceId] = useState()
     let navigate = useNavigate();
+    const [shoppingOption, setShoppingOption] = useState(0);
 
 
     const buy = async () => {
@@ -35,39 +36,12 @@ const CartModal = ({ handleCartClose }) => {
                 console.log(err)
             })
     }
-    
-    const shopping = async () => {
-        var prod = productCarts.map(product=>{
-            return {...product, _id: product.id}
-        })
-        console.log(prod)
-        const data = {
-            products: prod,
-        }
-        const headers = {
-            "Content-Type": "application/json",
-            'x-token': userLogged.token
-        }   
-        const response = await axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/shopping', data, {headers})
-            .then(res => {
-                console.log(res)
-                navigate('/')
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
 
-
-
-
-    return (
-        <><div className='shade'></div><div className='cart-container'>
-            <div className='header-modal'>
-                <span>Carrito de compras</span>
-                <span className='btn-close' onClick={() => { handleCartClose() }}>X</span>
-            </div>
-            <div id='page-content' className='body-modal'>
+    const renderSwitchCart = (shoppingOption) =>{
+        switch (shoppingOption) {
+        case 0:
+            return(
+                <div id='page-content' className='body-modal'>
                 {productCarts.length === 0 ? <h1>No hay productos en el carrito</h1> : <>
                     <ul className='cart-title-group'>
                         <li className='row-title'>Producto</li>
@@ -99,6 +73,49 @@ const CartModal = ({ handleCartClose }) => {
                     </div>
                 </div>
             </div>
+            )
+            break;
+            case 1:
+                return <h1>Hola</h1>
+                break;
+        default:
+            break;
+    }
+}
+    
+    const shopping = async () => {
+        var prod = productCarts.map(product=>{
+            return {...product, _id: product.id}
+        })
+        console.log(prod)
+        const data = {
+            products: prod,
+        }
+        const headers = {
+            "Content-Type": "application/json",
+            'x-token': userLogged.token
+        }   
+        const response = await axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/shopping', data, {headers})
+            .then(res => {
+                console.log(res)
+                setShoppingOption(1)
+                clearCart()
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+
+
+
+    return (
+        <><div className='shade'></div><div className='cart-container'>
+            <div className='header-modal'>
+                <span>Carrito de compras</span>
+                <span className='btn-close' onClick={() => { handleCartClose() }}>X</span>
+            </div>
+            {renderSwitchCart(shoppingOption)}
         </div></>
     )
 }
