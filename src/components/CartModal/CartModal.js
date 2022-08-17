@@ -37,55 +37,58 @@ const CartModal = ({ handleCartClose }) => {
             })
     }
 
-    const renderSwitchCart = (shoppingOption) =>{
+    const renderSwitchCart = (shoppingOption) => {
         switch (shoppingOption) {
-        case 0:
-            return(
-                <div id='page-content' className='body-modal'>
-                {productCarts.length === 0 ? <h1>No hay productos en el carrito</h1> : <>
-                    <ul className='cart-title-group'>
-                        <li className='row-title'>Producto</li>
-                    </ul></>}
-                {productCarts.map(product => {
-                    return (
-                        <div className='card-cart-product'>
-                            <div className='card-img-product'>
-                                <img src={product.img} />
-                            </div>
-                            <div className='card-detail-product'>
-                                <p>{product.name}</p>
-                                <p>Subtotal: ${product.price * product.quantity} ARS</p>
-                                <div className='group-btn '>
-                                    <button onClick={() => { removeItem(product.id, product.quantity) }} className="count-mobile">-</button>
-                                    <input type="text" className="count-mobile" value={product.quantity} readOnly />
-                                    <button onClick={() => { addItem(product.id, product.quantity) }} className="count-mobile">+</button>
+            case 0:
+                return (
+                    <div id='page-content' className='body-modal'>
+                        {productCarts.length === 0 ? <h1 className='title-not-product'>No hay productos en el carrito</h1> : <>
+                            <ul className='cart-title-group'>
+                                <li className='row-title'>Producto</li>
+                            </ul></>}
+                        {productCarts.map(product => {
+                            return (
+                                <div className='card-cart-product'>
+                                    <div className='card-img-product'>
+                                        <img src={product.img} />
+                                    </div>
+                                    <div className='card-detail-product'>
+                                        <p>{product.name}</p>
+                                        <p>Subtotal: ${product.price * product.quantity} ARS</p>
+                                        <div className='group-btn '>
+                                            <button onClick={() => { removeItem(product.id, product.quantity) }} className="count-mobile">-</button>
+                                            <input type="text" className="count-mobile" value={product.quantity} readOnly />
+                                            <button onClick={() => { addItem(product.id, product.quantity) }} className="count-mobile">+</button>
+                                        </div>
+                                    </div>
                                 </div>
+                            )
+                        })}
+                        {productCarts.length !== 0 && <div className='footer-modal'>
+                            <div className='d-flex justify-content-around'>
+                            <p>TOTAL: ${totalPrice}</p>
+                            <button className='btn-clear' onClick={()=>{clearCart()}}>Limpiar carrito</button>
                             </div>
-                        </div>
-                    )
-                })}
-                <div className='footer-modal'>
-                    {productCarts.length !== 0 && <p>TOTAL: {totalPrice}</p>}
-                    <div id='button-mp'>
-                    <button onClick={() => { shopping() }}>
-                        FINALIZAR COMPRA
-                    </button>
+                            <div id='button-mp'>
+                                <button onClick={() => { shopping() }}>
+                                    FINALIZAR COMPRA
+                                </button>
+                            </div>
+                        </div>}
                     </div>
-                </div>
-            </div>
-            )
-            break;
+                )
+                break;
             case 1:
                 return <h1>Hola</h1>
                 break;
-        default:
-            break;
+            default:
+                break;
+        }
     }
-}
-    
+
     const shopping = async () => {
-        var prod = productCarts.map(product=>{
-            return {...product, _id: product.id}
+        var prod = productCarts.map(product => {
+            return { ...product, _id: product.id }
         })
         console.log(prod)
         const data = {
@@ -94,8 +97,8 @@ const CartModal = ({ handleCartClose }) => {
         const headers = {
             "Content-Type": "application/json",
             'x-token': userLogged.token
-        }   
-        const response = await axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/shopping', data, {headers})
+        }
+        const response = await axios.post('https://restserver-lautaro-quevedo.herokuapp.com/api/shopping', data, { headers })
             .then(res => {
                 console.log(res)
                 setShoppingOption(1)

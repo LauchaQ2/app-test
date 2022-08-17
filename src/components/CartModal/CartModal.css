@@ -18,7 +18,9 @@
     justify-content: space-between;
     align-content: center;
 }
-
+.title-not-product{
+    text-align: center;
+}
 .header-modal span {
     padding: 10px;
     font-size: 25px;
@@ -91,7 +93,7 @@
 
 .body-modal {
     overflow-x: hidden;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 }
 
 .card-detail-product .group-btn {
@@ -122,6 +124,14 @@
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: black;
 }
+.d-flex{
+    display: flex;
+}
+.justify-content-around{
+    justify-content: space-around;
+    align-items: center;
+}
+
 #button-mp{
     display: flex;
     flex-direction: column;
